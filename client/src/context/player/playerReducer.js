@@ -7,6 +7,10 @@ import {
   OUTS_LOADED,
   LOAD_TEAMS,
   GET_UNDRAFTED,
+  FILTER_PLAYERS,
+  CLEAR_FILTER,
+  PLAYERS_LOADED,
+  SET_CURRENT,
 } from '../types'
 
 export default (state, action) => {
@@ -15,6 +19,11 @@ export default (state, action) => {
       return {
         ...state,
         nextPlayer: action.payload,
+      }
+    case PLAYERS_LOADED:
+      return {
+        ...state,
+        players: action.payload,
       }
     case BID_LOADED:
       return {
@@ -35,6 +44,24 @@ export default (state, action) => {
       return {
         ...state,
         undraftedPlayers: action.payload,
+      }
+    case FILTER_PLAYERS:
+      return {
+        ...state,
+        filtered: state.players.filter((player) => {
+          const regex = new RegExp(`${action.payload}`, 'gi')
+          return player.Name.match(regex) || player.Team.match(regex)
+        }),
+      }
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
+      }
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
       }
     case SET_PAUSE:
       return {

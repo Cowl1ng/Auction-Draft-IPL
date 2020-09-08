@@ -12,10 +12,8 @@ import Navbar from './components/Navbar'
 // Importing page components
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
-import MyTeam from './components/MyTeam'
-import AllTeams from './components/AllTeams'
+import Admin from './components/admin/Admin'
 import Drafting from './components/Drafting'
-
 import PrivateRoute from './components/routing/PrivateRoute'
 
 function App() {
@@ -29,8 +27,7 @@ function App() {
               <div>
                 <Switch>
                   <PrivateRoute exact path='/' component={Drafting} />
-                  <PrivateRoute exact path='/my_team' component={MyTeam} />
-                  <PrivateRoute exact path='/all_teams' component={AllTeams} />
+                  <PrivateRoute exact path='/admin' component={Admin} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                 </Switch>

@@ -12,11 +12,16 @@ import {
   SET_PAUSE,
   LOAD_TEAMS,
   GET_UNDRAFTED,
+  FILTER_PLAYERS,
+  CLEAR_FILTER,
+  PLAYERS_LOADED,
+  SET_CURRENT,
 } from '../types'
 
 const PlayerState = (props) => {
   const initialState = {
     nextPlayer: null,
+    players: null,
     error: null,
     maxBid: null,
     bids: null,
@@ -28,6 +33,8 @@ const PlayerState = (props) => {
     team3: [],
     team4: [],
     undraftedPlayers: [],
+    filtered: null,
+    current: null,
     pause: false,
   }
 
@@ -38,6 +45,17 @@ const PlayerState = (props) => {
     try {
       const res = await Axios.get('/api/players/undrafted/next')
       dispatch({ type: PLAYER_LOADED, payload: res.data })
+    } catch (error) {
+      dispatch({ type: PLAYER_ERROR })
+    }
+  }
+
+  // Load all players
+  const loadPlayers = async () => {
+    try {
+      const res = await Axios.get('api/players')
+      console.log(JSON.stringify(res.data))
+      dispatch({ type: PLAYERS_LOADED, payload: res.data })
     } catch (error) {
       dispatch({ type: PLAYER_ERROR })
     }
@@ -122,6 +140,18 @@ const PlayerState = (props) => {
     }
   }
 
+  // Filter players
+  const filterPlayers = (text) => {
+    dispatch({ type: FILTER_PLAYERS, payload: text })
+  }
+  // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER })
+  }
+  // Set Current Contact
+  const setCurrent = (contact) => {
+    dispatch({ type: SET_CURRENT, payload: contact })
+  }
   // Pause the timer
   const setPause = async (bool) => {
     dispatch({ type: SET_PAUSE, payload: bool })
@@ -131,6 +161,7 @@ const PlayerState = (props) => {
     <PlayerContext.Provider
       value={{
         nextPlayer: state.nextPlayer,
+        players: state.players,
         error: state.error,
         maxBid: state.maxBid,
         bids: state.bids,
@@ -142,12 +173,18 @@ const PlayerState = (props) => {
         team4: state.team4,
         pause: state.pause,
         undraftedPlayers: state.undraftedPlayers,
+        filtered: state.filtered,
+        current: state.current,
         loadNextPlayer,
+        loadPlayers,
         loadMaxBid,
         loadBids,
         loadTeams,
         loadOuts,
         getUndrafted,
+        filterPlayers,
+        clearFilter,
+        setCurrent,
         setPause,
       }}
     >

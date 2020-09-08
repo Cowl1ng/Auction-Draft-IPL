@@ -117,7 +117,7 @@ const Stopwatch = ({ winningBid }) => {
     if (pause) {
       setSeconds(maxSeconds)
     }
-    if (seconds % 5 === 0) {
+    if (seconds % 2 === 0) {
       setSlowTimer(true)
     } else if (slowTimer === true) {
       setSlowTimer(false)

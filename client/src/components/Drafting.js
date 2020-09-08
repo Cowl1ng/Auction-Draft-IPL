@@ -6,7 +6,7 @@ import Stopwatch from './Stopwatch'
 import TeamList from './TeamList'
 
 // Bootstrap-react imports
-import { Container, Row, Col, Button } from 'react-bootstrap/'
+import { Container, Row, Col, Button, Image } from 'react-bootstrap/'
 import { useMutation, useQuery } from 'react-query'
 
 import AuthContext from '../context/auth/authContext'
@@ -116,6 +116,7 @@ const Drafting = () => {
             <h1>
               Player UP:
               <br /> {nextPlayer.Name}
+              <Image src={nextPlayer.imageURL} />
             </h1>
           )}
         </Col>
