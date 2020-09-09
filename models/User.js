@@ -23,6 +23,10 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  pause: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 module.exports = mongoose.model('user', UserSchema)

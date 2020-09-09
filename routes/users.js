@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator')
 
 // Bring in user schema
 const User = require('../models/User')
+const Player = require('../models/Player')
 
 // @route     POST api/users
 // @desc      Register a user
@@ -79,6 +80,36 @@ router.get('/', async (req, res) => {
   const users = await User.find({})
   const userNames = users.map((user) => user.name)
   res.send(userNames)
+})
+
+router.get('/pause', async (req, res) => {
+  try {
+    pause = await User.findOne({ pause: true })
+    if (pause === null) {
+      res.json({ pause: false })
+    } else {
+      res.json({ pause: true })
+    }
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+router.put('/pause/:pause', async (req, res) => {
+  console.log(`PARAMPAUSE: ${JSON.stringify(req.params.pause)}`)
+  const isPauseTrue = req.params.pause === 'true'
+  try {
+    const user = await User.findOneAndUpdate(
+      { name: 'Tim' },
+      { pause: isPauseTrue },
+      { new: true }
+    )
+    res.send(user)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
 })
 
 // Export router for use in server.js

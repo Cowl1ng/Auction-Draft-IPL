@@ -99,7 +99,6 @@ const PlayerState = (props) => {
           player: player.Name,
         },
       })
-      console.log(`OUTS${JSON.stringify(res.data)}`)
       dispatch({ type: OUTS_LOADED, payload: res.data })
     } catch (error) {
       dispatch({ type: PLAYER_ERROR })
@@ -163,7 +162,6 @@ const PlayerState = (props) => {
     }
     try {
       const res = await Axios.put(`/api/players/${player._id}`, player, config)
-      console.log(res.data)
       dispatch({ type: UPDATE_PLAYER, payload: res.data })
     } catch (error) {
       dispatch({ type: PLAYER_ERROR })

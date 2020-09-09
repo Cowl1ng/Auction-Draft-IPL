@@ -64,12 +64,8 @@ const Drafting = () => {
   useEffect(() => {
     if (nextPlayer) {
       loadOuts(nextPlayer)
-      console.log(`1: ${JSON.stringify(outs)}`)
       if (outs !== undefined) {
-        console.log(`2: ${JSON.stringify(outs.out)}`)
-        console.log(`2: ${JSON.stringify(outs.out.length)}`)
         if (outs.out.length > 1) {
-          console.log(`3: ${JSON.stringify(outs)}`)
           let outNames = [...new Set(outs.out.map((bid) => bid.owner))]
           if (outNames.includes(user.name)) {
             setButtonState('danger')

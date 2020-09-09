@@ -6,6 +6,7 @@ import useInterval from './useInterval'
 import { useMutation, useQuery } from 'react-query'
 
 import PlayerContext from '../context/player/playerContext'
+import PauseContext from '../context/pause/pauseContext'
 import { Row, Button } from 'react-bootstrap'
 
 const maxSeconds = 30
@@ -19,6 +20,7 @@ const assignPlayer = async (data) => {
 
 const Stopwatch = ({ winningBid }) => {
   const playerContext = useContext(PlayerContext)
+  const pauseContext = useContext(PauseContext)
 
   const {
     loadNextPlayer,
@@ -30,8 +32,9 @@ const Stopwatch = ({ winningBid }) => {
     maxBid,
     bids,
     outs,
-    pause,
   } = playerContext
+
+  const { getPause, pause } = pauseContext
 
   const [seconds, setSeconds] = useState(0)
   const [delay, setDelay] = useState(0)
@@ -54,7 +57,7 @@ const Stopwatch = ({ winningBid }) => {
             price: winningBid.value,
           })
         } else {
-          mutate({ player: nextPlayer, owner: 'teamless' })
+          mutate({ player: nextPlayer, owner: 'teamless', price: 0 })
         }
       }
       setDelay(delay + 1)
@@ -79,6 +82,7 @@ const Stopwatch = ({ winningBid }) => {
 
   useEffect(() => {
     loadMaxBid(nextPlayer)
+    getPause()
     if (winningBid) {
       setWinningBidValue(winningBid.value)
     }
