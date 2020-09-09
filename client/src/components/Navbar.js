@@ -14,9 +14,21 @@ const Navbar = ({ title, icon }) => {
 
   const authLinks = (
     <Fragment>
-      <li>
-        <Link to='/'>Drafting</Link>
-      </li>
+      {user !== null ? (
+        user.name === 'Luke' ? (
+          <li>
+            <Link to='/settings'>Drafting</Link>
+          </li>
+        ) : (
+          <li>
+            <Link to='/'>Drafting</Link>
+          </li>
+        )
+      ) : (
+        <li>
+          <Link to='/'>Drafting</Link>
+        </li>
+      )}
       <li> Hello {user && user.name} </li>
       <li>
         <a onClick={onLogout} href='#!'>
