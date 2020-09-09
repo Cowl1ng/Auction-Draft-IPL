@@ -29,7 +29,7 @@ function App() {
                 <div>
                   <Switch>
                     <PrivateRoute exact path='/' component={Drafting} />
-                    <PrivateRoute exact path='/admin' component={Admin} />
+                    <Route exact path='/admin' component={Admin} />
                     <Route exact path='/register' component={Register} />
                     <Route exact path='/login' component={Login} />
                   </Switch>
