@@ -19,6 +19,10 @@ const Navbar = ({ title, icon }) => {
           <li>
             <Link to='/settings'>Drafting</Link>
           </li>
+        ) : user.name === 'Tim' ? (
+          <li>
+            <Link to='/settings'>Drafting</Link>
+          </li>
         ) : (
           <li>
             <Link to='/'>Drafting</Link>
