@@ -2,7 +2,9 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #003699;
+  --primary-color: #252a37;
+  --secondary-color: #e3cf5b;
+  --tertiary-color: #c7d0d8;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;

@@ -11,6 +11,8 @@ import {
   CLEAR_FILTER,
   PLAYERS_LOADED,
   SET_CURRENT,
+  CLEAR_CURRENT,
+  UPDATE_PLAYER,
 } from '../types'
 
 export default (state, action) => {
@@ -62,6 +64,18 @@ export default (state, action) => {
       return {
         ...state,
         current: action.payload,
+      }
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null,
+      }
+    case UPDATE_PLAYER:
+      return {
+        ...state,
+        players: state.players.map((player) =>
+          player._id === action.payload._id ? action.payload : player
+        ),
       }
     case SET_PAUSE:
       return {

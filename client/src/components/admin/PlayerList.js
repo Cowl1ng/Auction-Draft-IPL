@@ -10,8 +10,6 @@ const PlayerList = () => {
 
   useEffect(() => {
     loadPlayers()
-    console.log(`LOADINGPLAYERS`)
-    console.log(`PLAYERS: ${players}`)
   }, [])
 
   return (

@@ -155,5 +155,34 @@ router.put('/', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  const { Name, owner, price } = req.body
+
+  const playerFields = {}
+  if (Name) playerFields.Name = Name
+  if (owner) playerFields.owner = owner
+  if (price) playerFields.price = price
+
+  try {
+    let player = await Player.findById(req.params.id)
+    if (!player) {
+      console.log(`PLayer not found`)
+      return res.status(404).json({ msg: 'Player not found' })
+    }
+
+    player = await Player.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: playerFields,
+      },
+      { new: true }
+    )
+    res.json(player)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 // Export router for use in server.js
 module.exports = router

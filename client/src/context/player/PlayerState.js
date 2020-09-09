@@ -16,6 +16,8 @@ import {
   CLEAR_FILTER,
   PLAYERS_LOADED,
   SET_CURRENT,
+  CLEAR_CURRENT,
+  UPDATE_PLAYER,
 } from '../types'
 
 const PlayerState = (props) => {
@@ -148,10 +150,31 @@ const PlayerState = (props) => {
   const clearFilter = () => {
     dispatch({ type: CLEAR_FILTER })
   }
-  // Set Current Contact
-  const setCurrent = (contact) => {
-    dispatch({ type: SET_CURRENT, payload: contact })
+  // Set Current Player
+  const setCurrent = (player) => {
+    dispatch({ type: SET_CURRENT, payload: player })
   }
+  // Update current player
+  const updatePlayer = async (player) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await Axios.put(`/api/players/${player._id}`, player, config)
+      console.log(res.data)
+      dispatch({ type: UPDATE_PLAYER, payload: res.data })
+    } catch (error) {
+      dispatch({ type: PLAYER_ERROR })
+    }
+  }
+
+  // Clear Current Contact
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT })
+  }
+
   // Pause the timer
   const setPause = async (bool) => {
     dispatch({ type: SET_PAUSE, payload: bool })
@@ -185,6 +208,8 @@ const PlayerState = (props) => {
         filterPlayers,
         clearFilter,
         setCurrent,
+        updatePlayer,
+        clearCurrent,
         setPause,
       }}
     >
