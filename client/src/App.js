@@ -29,8 +29,8 @@ function App() {
                 <div>
                   <Switch>
                     <PrivateRoute exact path='/' component={Drafting} />
-                    <Route exact path='/register' component={Admin} />
-                    <Route exact path='/admin' component={Register} />
+                    <Route exact path='/settings' component={Admin} />
+                    <Route exact path='/register' component={Register} />
                     <Route exact path='/login' component={Login} />
                   </Switch>
                 </div>
