@@ -158,11 +158,6 @@ const Stopwatch = ({ winningBid }) => {
       ) : (
         <h1>Noone</h1>
       )}
-      <Row style={{ justifyContent: 'center', paddingBottom: 50 }}>
-        <Button size='lg' onClick={handleClick}>
-          {pause ? <h1>Unpause</h1> : <h1>Pause</h1>}
-        </Button>
-      </Row>
     </div>
   )
 }
