@@ -37,7 +37,7 @@ const Admin = () => {
           {pause ? <h1>UNPAUSE</h1> : <h1>PAUSE</h1>}
         </Button>
         <PlayerFilter />
-        <PlayerList />
+        {/* <PlayerList /> */}
       </Col>
     </Row>
   )
