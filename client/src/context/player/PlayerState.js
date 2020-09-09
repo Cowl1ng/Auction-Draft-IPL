@@ -56,7 +56,6 @@ const PlayerState = (props) => {
   const loadPlayers = async () => {
     try {
       const res = await Axios.get('api/players')
-      console.log(JSON.stringify(res.data))
       dispatch({ type: PLAYERS_LOADED, payload: res.data })
     } catch (error) {
       dispatch({ type: PLAYER_ERROR })

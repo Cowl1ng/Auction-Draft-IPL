@@ -19,7 +19,7 @@ const PlayerList = () => {
           filtered !== null ? (
             filtered.map((player) => (
               <div>
-                <h1 key={player._id}>
+                <h1>
                   Player: {player.Name}
                   <br />
                   Owner: {player.owner}
@@ -31,7 +31,7 @@ const PlayerList = () => {
             ))
           ) : (
             players.map((player) => (
-              <div>
+              <div key={player._id}>
                 <h1 key={player._id}>
                   Player: {player.Name}
                   <br />
