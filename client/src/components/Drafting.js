@@ -16,16 +16,6 @@ const sendBid = async (player, owner, bid, out) => {
   const res = await Axios.post('/api/players/bid', { player, owner, bid, out })
 }
 
-const getBids = async (key, player) => {
-  const nextPlayer = player[0]
-  const res = await Axios.get(`/api/players/bid`, {
-    params: {
-      player: nextPlayer.Name,
-    },
-  })
-  return res.data
-}
-
 const Drafting = () => {
   const authContext = useContext(AuthContext)
   const playerContext = useContext(PlayerContext)
@@ -74,12 +64,18 @@ const Drafting = () => {
   useEffect(() => {
     if (nextPlayer) {
       loadOuts(nextPlayer)
-      if (outs.length > 1) {
-        let outNames = [...new Set(outs.out.map((bid) => bid.owner))]
-        if (outNames.includes(user.name)) {
-          setButtonState('danger')
-        } else {
-          setButtonState('primary')
+      console.log(`1: ${JSON.stringify(outs)}`)
+      if (outs !== undefined) {
+        console.log(`2: ${JSON.stringify(outs.out)}`)
+        console.log(`2: ${JSON.stringify(outs.out.length)}`)
+        if (outs.out.length > 1) {
+          console.log(`3: ${JSON.stringify(outs)}`)
+          let outNames = [...new Set(outs.out.map((bid) => bid.owner))]
+          if (outNames.includes(user.name)) {
+            setButtonState('danger')
+          } else {
+            setButtonState('primary')
+          }
         }
       }
     }

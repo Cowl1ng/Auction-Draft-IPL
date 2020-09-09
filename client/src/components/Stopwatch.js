@@ -142,7 +142,7 @@ const Stopwatch = ({ winningBid }) => {
           {winningBid.owner ? (
             winningBid.owner
           ) : (
-            <h1 style={{ fontSize: 65 }}>Noone</h1>
+            <h2 style={{ fontSize: 65 }}>Noone</h2>
           )}
         </h1>
       ) : (
