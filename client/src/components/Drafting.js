@@ -72,6 +72,8 @@ const Drafting = () => {
           } else {
             setButtonState('primary')
           }
+        } else {
+          setButtonState('primary')
         }
       }
     }

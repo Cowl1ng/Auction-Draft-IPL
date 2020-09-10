@@ -134,23 +134,16 @@ const Stopwatch = ({ winningBid }) => {
 
   const [mutate] = useMutation(assignPlayer, {})
 
-  const handleClick = () => {
-    setPause(!pause)
-  }
-
   return (
     <div>
       {delay > 0 ? (
-        <h1 style={{ fontSize: 65 }}>
-          SOLD TO{' '}
-          {winningBid.owner ? (
-            winningBid.owner
-          ) : (
-            <h2 style={{ fontSize: 65 }}>Noone</h2>
-          )}
-        </h1>
+        winningBid.owner ? (
+          <h1 style={{ fontSize: 65 }}>SOLD TO {winningBid.owner}</h1>
+        ) : (
+          <h1 style={{ fontSize: 65 }}>SOLD TO NOONE</h1>
+        )
       ) : (
-        <h1 style={{ fontSize: 65 }}>00 : {seconds}</h1>
+        <h1 style={{ fontSize: 65 }}>0 : {seconds}</h1>
       )}
       <br />
       <h1>Highest Bid</h1>
@@ -160,7 +153,7 @@ const Stopwatch = ({ winningBid }) => {
           {winningBid.owner} : £ {winningBid.value}
         </h1>
       ) : (
-        <h1>Noone</h1>
+        <h1></h1>
       )}
     </div>
   )
