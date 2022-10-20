@@ -1,6 +1,9 @@
 {
   "name": "auction-draft-ipl",
   "version": "1.0.0",
+  "engines": {
+    "node": "v12.18.3"
+  },  
   "description": "Auction Draft for IPL",
   "main": "server.js",
   "dependencies": {
